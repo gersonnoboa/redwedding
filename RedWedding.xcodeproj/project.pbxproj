@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05D409E8243BD36C3913F2E1 /* Pods_RedWedding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F47BF34567E0488DBE3A9CE /* Pods_RedWedding.framework */; };
+		4FE6273B831069A0D15F32E4 /* Pods_RedWeddingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 026DE236A8F1437034E384E4 /* Pods_RedWeddingTests.framework */; };
 		A3AAFD702481BFBB00BBF6A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AAFD6F2481BFBB00BBF6A1 /* AppDelegate.swift */; };
 		A3AAFD722481BFBB00BBF6A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AAFD712481BFBB00BBF6A1 /* SceneDelegate.swift */; };
 		A3AAFD742481BFBB00BBF6A1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AAFD732481BFBB00BBF6A1 /* MainViewController.swift */; };
@@ -29,6 +31,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		026DE236A8F1437034E384E4 /* Pods_RedWeddingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RedWeddingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0753E6DA0D8AF76E053EF667 /* Pods-RedWeddingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedWeddingTests.release.xcconfig"; path = "Target Support Files/Pods-RedWeddingTests/Pods-RedWeddingTests.release.xcconfig"; sourceTree = "<group>"; };
+		5F47BF34567E0488DBE3A9CE /* Pods_RedWedding.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RedWedding.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3AAFD6C2481BFBB00BBF6A1 /* RedWedding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RedWedding.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3AAFD6F2481BFBB00BBF6A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3AAFD712481BFBB00BBF6A1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,6 +47,9 @@
 		A3AAFD882481BFBD00BBF6A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3AAFD922481C07700BBF6A1 /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
 		A3AAFD942481C07F00BBF6A1 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
+		B5F9258F96CB80028FE537AD /* Pods-RedWedding.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedWedding.debug.xcconfig"; path = "Target Support Files/Pods-RedWedding/Pods-RedWedding.debug.xcconfig"; sourceTree = "<group>"; };
+		BC9A97271C9F97F65E9C371C /* Pods-RedWedding.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedWedding.release.xcconfig"; path = "Target Support Files/Pods-RedWedding/Pods-RedWedding.release.xcconfig"; sourceTree = "<group>"; };
+		D55A4531D90C400ED4AD812E /* Pods-RedWeddingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedWeddingTests.debug.xcconfig"; path = "Target Support Files/Pods-RedWeddingTests/Pods-RedWeddingTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05D409E8243BD36C3913F2E1 /* Pods_RedWedding.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,12 +65,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FE6273B831069A0D15F32E4 /* Pods_RedWeddingTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4992020E3464E3F6FB2B8FB4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B5F9258F96CB80028FE537AD /* Pods-RedWedding.debug.xcconfig */,
+				BC9A97271C9F97F65E9C371C /* Pods-RedWedding.release.xcconfig */,
+				D55A4531D90C400ED4AD812E /* Pods-RedWeddingTests.debug.xcconfig */,
+				0753E6DA0D8AF76E053EF667 /* Pods-RedWeddingTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		9F49ADE9FE964CE85533A692 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5F47BF34567E0488DBE3A9CE /* Pods_RedWedding.framework */,
+				026DE236A8F1437034E384E4 /* Pods_RedWeddingTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A33767C42481C47F004F19DB /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +107,8 @@
 				A3AAFD6E2481BFBB00BBF6A1 /* RedWedding */,
 				A3AAFD852481BFBD00BBF6A1 /* RedWeddingTests */,
 				A3AAFD6D2481BFBB00BBF6A1 /* Products */,
+				4992020E3464E3F6FB2B8FB4 /* Pods */,
+				9F49ADE9FE964CE85533A692 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -128,9 +161,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A3AAFD8B2481BFBD00BBF6A1 /* Build configuration list for PBXNativeTarget "RedWedding" */;
 			buildPhases = (
+				BA8F24D4A056408FE9FC66E2 /* [CP] Check Pods Manifest.lock */,
 				A3AAFD682481BFBB00BBF6A1 /* Sources */,
 				A3AAFD692481BFBB00BBF6A1 /* Frameworks */,
 				A3AAFD6A2481BFBB00BBF6A1 /* Resources */,
+				DBC6FEA922ED73BF42390D99 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -145,6 +180,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A3AAFD8E2481BFBD00BBF6A1 /* Build configuration list for PBXNativeTarget "RedWeddingTests" */;
 			buildPhases = (
+				68BC4D358C615EC3CD59F038 /* [CP] Check Pods Manifest.lock */,
 				A3AAFD7E2481BFBD00BBF6A1 /* Sources */,
 				A3AAFD7F2481BFBD00BBF6A1 /* Frameworks */,
 				A3AAFD802481BFBD00BBF6A1 /* Resources */,
@@ -216,6 +252,70 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		68BC4D358C615EC3CD59F038 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RedWeddingTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BA8F24D4A056408FE9FC66E2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RedWedding-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DBC6FEA922ED73BF42390D99 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RedWedding/Pods-RedWedding-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RedWedding/Pods-RedWedding-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RedWedding/Pods-RedWedding-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A3AAFD682481BFBB00BBF6A1 /* Sources */ = {
@@ -384,6 +484,7 @@
 		};
 		A3AAFD8C2481BFBD00BBF6A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B5F9258F96CB80028FE537AD /* Pods-RedWedding.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -401,6 +502,7 @@
 		};
 		A3AAFD8D2481BFBD00BBF6A1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC9A97271C9F97F65E9C371C /* Pods-RedWedding.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -418,6 +520,7 @@
 		};
 		A3AAFD8F2481BFBD00BBF6A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D55A4531D90C400ED4AD812E /* Pods-RedWeddingTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -439,6 +542,7 @@
 		};
 		A3AAFD902481BFBD00BBF6A1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0753E6DA0D8AF76E053EF667 /* Pods-RedWeddingTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

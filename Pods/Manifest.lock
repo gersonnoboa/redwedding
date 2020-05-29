@@ -1,0 +1,16 @@
+PODS:
+  - RNCryptor (5.1.0)
+
+DEPENDENCIES:
+  - RNCryptor (~> 5.0)
+
+SPEC REPOS:
+  trunk:
+    - RNCryptor
+
+SPEC CHECKSUMS:
+  RNCryptor: a369134686cd2ad391323cc856b62e591193ba79
+
+PODFILE CHECKSUM: 2a2f1d9b7563df2492764cf5fbb3e7a09b52a276
+
+COCOAPODS: 1.9.3
