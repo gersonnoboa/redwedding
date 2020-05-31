@@ -7,11 +7,13 @@
 //
 
 import Foundation
+import RNCryptor
 
 protocol EncryptionInteractorProtocol {
     var presenter: EncryptionPresenterProtocol? { get set }
 
     func requestEncryption(of phrase: String?, using password: String?)
+    func requestDecryption(using password: String?)
 }
 
 final class EncryptionInteractor: EncryptionInteractorProtocol {
@@ -36,5 +38,37 @@ final class EncryptionInteractor: EncryptionInteractorProtocol {
         self.persistance.save(data, usingKey: .encryptedData)
 
         self.presenter?.presentEncryptionSuccessfulMessage()
+    }
+
+    func requestDecryption(using password: String?) {
+        guard let password = password else {
+            self.presenter?.presentPasswordEmptyError()
+
+            return
+        }
+
+        guard let data = self.persistance.load(usingKey: .encryptedData) as? Data else {
+                self.presenter?.presentDecryptionError()
+
+                return
+        }
+
+        do {
+            let decryptedData = try self.encryption.decrypt(data, using: password)
+
+            guard let decData = decryptedData, let phrase = String(bytes: decData, encoding: .utf8) else {
+                self.presenter?.presentDecryptionError()
+
+                return
+            }
+
+            self.presenter?.presentDecryptedPhrase(phrase)
+        }
+        catch RNCryptor.Error.hmacMismatch {
+            self.presenter?.presentIncorrectPasswordError()
+        }
+        catch {
+            self.presenter?.presentDecryptionError()
+        }
     }
 }

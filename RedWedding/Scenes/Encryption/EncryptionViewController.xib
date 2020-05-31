@@ -67,6 +67,9 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BjN-qf-1fM">
                             <rect key="frame" x="0.0" y="146" width="382" height="30"/>
                             <state key="normal" title="Decrypt"/>
+                            <connections>
+                                <action selector="decryptButtonPressed" destination="-1" eventType="touchUpInside" id="9KJ-K5-dTe"/>
+                            </connections>
                         </button>
                     </subviews>
                     <constraints>

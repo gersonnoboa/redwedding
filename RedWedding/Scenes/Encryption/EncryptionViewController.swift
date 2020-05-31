@@ -12,6 +12,8 @@ protocol EncryptionViewControllerProtocol: class {
     var interactor: EncryptionInteractorProtocol? { get set }
 
     func showAlert(withTitle title: String, message: String)
+    func showDecryptedPhrase(_ phrase: String)
+    func clearFields()
 }
 
 final class EncryptionViewController: UIViewController, EncryptionViewControllerProtocol {
@@ -48,11 +50,23 @@ final class EncryptionViewController: UIViewController, EncryptionViewController
         self.interactor?.requestEncryption(of: self.phraseTextField.text, using: self.passwordTextField.text)
     }
 
+    @IBAction func decryptButtonPressed() {
+        self.interactor?.requestDecryption(using: self.passwordTextField.text)
+    }
+
     func showAlert(withTitle title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(action)
 
         self.present(alert, animated: true, completion: nil)
+    }
+
+    func clearFields() {
+        self.phraseTextField.text = ""
+    }
+
+    func showDecryptedPhrase(_ phrase: String) {
+        self.phraseTextField.text = phrase
     }
 }

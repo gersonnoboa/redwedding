@@ -15,6 +15,10 @@ protocol EncryptionPresenterProtocol {
     func presentPhraseEmptyError()
     func presentPasswordWithoutRequirementsError()
     func presentEncryptionError()
+    func presentPasswordEmptyError()
+    func presentDecryptionError()
+    func presentDecryptedPhrase(_ phrase: String)
+    func presentIncorrectPasswordError()
 }
 
 final class EncryptionPresenter: EncryptionPresenterProtocol {
@@ -22,6 +26,7 @@ final class EncryptionPresenter: EncryptionPresenterProtocol {
 
     func presentEncryptionSuccessfulMessage() {
         self.viewController?.showAlert(withTitle: "Success", message: "Phrase encrypted successfully.")
+        self.viewController?.clearFields()
     }
 
     func presentPhraseEmptyError() {
@@ -37,5 +42,21 @@ final class EncryptionPresenter: EncryptionPresenterProtocol {
 
     func presentEncryptionError() {
         self.viewController?.showAlert(withTitle: "Error", message: "Error encrypting phrase.")
+    }
+
+    func presentPasswordEmptyError() {
+        self.viewController?.showAlert(withTitle: "Error", message: "Password must not be empty.")
+    }
+
+    func presentDecryptionError() {
+        self.viewController?.showAlert(withTitle: "Error", message: "Error decrypting phrase.")
+    }
+
+    func presentIncorrectPasswordError() {
+        self.viewController?.showAlert(withTitle: "Error", message: "Incorrect password.")
+    }
+
+    func presentDecryptedPhrase(_ phrase: String) {
+        self.viewController?.showDecryptedPhrase(phrase)
     }
 }

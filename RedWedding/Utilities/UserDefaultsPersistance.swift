@@ -14,7 +14,7 @@ enum PersistanceKey: String {
 
 protocol PersistanceProtocol {
     func save(_ data: Data, usingKey key: PersistanceKey)
-    func load(usingKey key: PersistanceKey)
+    func load(usingKey key: PersistanceKey) -> Any?
 }
 
 final class UserDefaultsPersistance: PersistanceProtocol {
@@ -24,7 +24,7 @@ final class UserDefaultsPersistance: PersistanceProtocol {
         self.userDefaults.set(data, forKey: key.rawValue)
     }
 
-    func load(usingKey key: PersistanceKey) {
+    func load(usingKey key: PersistanceKey) -> Any? {
         self.userDefaults.value(forKey: key.rawValue)
     }
 }
