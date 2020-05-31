@@ -37,7 +37,6 @@ final class KeychainPersistance: PersistanceProtocol {
             kSecValueData as String: data]
 
         if needsBiometric {
-            //query[kSecUseAuthenticationContext as String] = self.biometrics.context
             query[kSecAttrAccessControl as String] = self.access
         }
 
@@ -57,7 +56,6 @@ final class KeychainPersistance: PersistanceProtocol {
         if needsBiometric {
             query[kSecAttrAccessControl as String] = self.access
             query[kSecUseOperationPrompt as String] = "Decrypt by using your stored password in the keychain."
-            //query[kSecUseAuthenticationContext as String] = self.biometrics.context
         }
         
         var data: CFTypeRef?

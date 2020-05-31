@@ -71,7 +71,7 @@ final class EncryptionInteractor: EncryptionInteractorProtocol {
 
     func requestDecryption(using password: String?) {
         if self.biometrics.areBiometricsAvailable() {
-            decryptWithBiometrics()
+            decryptWithBiometrics(fallbackPassword: password)
         }
         else {
             decryptWithPassword(password)
@@ -106,12 +106,12 @@ extension EncryptionInteractor {
         self.determineButtonsAppearance()
     }
 
-    private func decryptWithBiometrics() {
+    private func decryptWithBiometrics(fallbackPassword: String?) {
         self.persistance.load(usingKey: .encryptedPassword, needsBiometric: true) { [weak self] data in
             guard let self = self else { return }
 
             guard let data = data else {
-                self.presenter?.presentDecryptionError()
+                self.decryptWithPassword(fallbackPassword)
                 return
             }
 

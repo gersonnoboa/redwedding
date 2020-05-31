@@ -16,9 +16,7 @@ final class Biometrics: BiometricsProtocol {
     private let context = LAContext()
 
     func areBiometricsAvailable() -> Bool {
-        return false
-        
-        let _ = isEnabled()
+        let _ = self.context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
 
         switch self.context.biometryType {
         case .touchID, .faceID:
@@ -26,9 +24,5 @@ final class Biometrics: BiometricsProtocol {
         default:
             return false
         }
-    }
-
-    private func isEnabled() -> Bool {
-        return self.context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
     }
 }
