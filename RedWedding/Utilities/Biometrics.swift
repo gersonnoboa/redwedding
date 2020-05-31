@@ -10,16 +10,17 @@ import LocalAuthentication
 
 protocol BiometricsProtocol {
     func areBiometricsAvailable() -> Bool
-    func isEnabled() -> Bool
 }
 
 final class Biometrics: BiometricsProtocol {
-    private let authContext = LAContext()
+    private let context = LAContext()
 
     func areBiometricsAvailable() -> Bool {
+        return false
+        
         let _ = isEnabled()
 
-        switch authContext.biometryType {
+        switch self.context.biometryType {
         case .touchID, .faceID:
             return true
         default:
@@ -27,7 +28,7 @@ final class Biometrics: BiometricsProtocol {
         }
     }
 
-    func isEnabled() -> Bool {
-        return authContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
+    private func isEnabled() -> Bool {
+        return self.context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
     }
 }

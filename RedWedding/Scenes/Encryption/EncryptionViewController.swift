@@ -82,6 +82,7 @@ extension EncryptionViewController: EncryptionViewControllerProtocol {
 
     func showDecryptedPhrase(_ phrase: String) {
         self.phraseTextField.text = phrase
+        self.passwordTextField.resignFirstResponder()
     }
 
     func changeButtonsAppearance(encrypt isEncryptedShown: Bool, others areOthersShown: Bool) {

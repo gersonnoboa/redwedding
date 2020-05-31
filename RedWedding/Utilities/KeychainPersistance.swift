@@ -9,39 +9,71 @@
 import Foundation
 
 enum PersistanceKey: String {
-    case encryptedData, encryptedPassword
+    case encryptedPhrase, encryptedPassword
 }
 
 protocol PersistanceProtocol {
     func save(_ data: Data, usingKey key: PersistanceKey, needsBiometric: Bool) -> Bool
-    func load(usingKey key: PersistanceKey, needsBiometric: Bool) -> Data?
+    func load(usingKey key: PersistanceKey, needsBiometric: Bool, completion: @escaping ((Data?) -> Void))
     func clear(usingKey key: PersistanceKey) -> Bool
 }
 
 final class KeychainPersistance: PersistanceProtocol {
+    var biometrics: BiometricsProtocol = Biometrics()
+    
+    private lazy var access: SecAccessControl? = {
+        return SecAccessControlCreateWithFlags(
+            nil,
+            kSecAttrAccessibleWhenUnlockedThisDeviceOnly,
+            .userPresence,
+            nil
+        )
+    }()
+
     func save(_ data: Data, usingKey key: PersistanceKey, needsBiometric: Bool) -> Bool {
-        let query: [String: Any] = [
+        var query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key.rawValue,
             kSecValueData as String: data]
+
+        if needsBiometric {
+            //query[kSecUseAuthenticationContext as String] = self.biometrics.context
+            query[kSecAttrAccessControl as String] = self.access
+        }
+
         let status = SecItemAdd(query as CFDictionary, nil)
 
         return status == errSecSuccess
     }
 
-    func load(usingKey key: PersistanceKey, needsBiometric: Bool) -> Data? {
-        let query: [String: Any] = [
+    func load(usingKey key: PersistanceKey, needsBiometric: Bool, completion: @escaping ((Data?) -> Void)) {
+        var query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key.rawValue,
-            kSecReturnData as String: kCFBooleanTrue!,
+            kSecReturnData as String: true,
             kSecMatchLimit as String: kSecMatchLimitOne
         ]
-        var data: AnyObject?
-        let status = SecItemCopyMatching(query as CFDictionary, &data)
 
-        guard status == errSecSuccess else { return nil }
+        if needsBiometric {
+            query[kSecAttrAccessControl as String] = self.access
+            query[kSecUseOperationPrompt as String] = "Decrypt by using your stored password in the keychain."
+            //query[kSecUseAuthenticationContext as String] = self.biometrics.context
+        }
+        
+        var data: CFTypeRef?
+        DispatchQueue.global().async {
+            let status = SecItemCopyMatching(query as CFDictionary, &data)
 
-        return data as? Data
+            DispatchQueue.main.async {
+                guard status == errSecSuccess else {
+                    completion(nil)
+
+                    return
+                }
+
+                completion(data as? Data)
+            }
+        }
     }
 
     func clear(usingKey key: PersistanceKey) -> Bool {
