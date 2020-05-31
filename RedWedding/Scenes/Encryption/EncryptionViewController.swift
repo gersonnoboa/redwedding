@@ -38,6 +38,8 @@ final class EncryptionViewController: UIViewController {
         super.viewDidLoad()
 
         self.title = "Welcome"
+        self.passwordTextField.delegate = self
+
         setup()
         self.interactor?.determineButtonsAppearance()
     }
@@ -86,5 +88,11 @@ extension EncryptionViewController: EncryptionViewControllerProtocol {
         self.encryptButton.isHidden = !isEncryptedShown
         self.decryptButton.isHidden = !areOthersShown
         self.clearButton.isHidden = !areOthersShown
+    }
+}
+
+extension EncryptionViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return textField.text?.count ?? 0 < 6
     }
 }

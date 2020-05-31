@@ -21,7 +21,7 @@ protocol EncryptionInteractorProtocol {
 final class EncryptionInteractor: EncryptionInteractorProtocol {
     var presenter: EncryptionPresenterProtocol?
     var encryption: EncryptionProtocol = RNCryptorEncryption()
-    var persistance: PersistanceProtocol = UserDefaultsPersistance()
+    var persistance: PersistanceProtocol = KeychainPersistance()
 
     private let passwordLength = 6
 
@@ -45,11 +45,16 @@ final class EncryptionInteractor: EncryptionInteractorProtocol {
         }
         
         let data = self.encryption.encrypt(phrase, using: password)
-        self.persistance.save(data, usingKey: .encryptedData)
+        let isSaveSuccessful = self.persistance.save(data, usingKey: .encryptedData)
 
-        self.presenter?.presentEncryptedSuccessfully()
-        self.presenter?.presentEmptyFields()
-        self.determineButtonsAppearance()
+        if isSaveSuccessful {
+            self.presenter?.presentEncryptedSuccessfully()
+            self.presenter?.presentEmptyFields()
+            self.determineButtonsAppearance()
+        }
+        else {
+            self.presenter?.presentEncryptionError()
+        }
     }
 
     func requestDecryption(using password: String?) {
@@ -58,7 +63,7 @@ final class EncryptionInteractor: EncryptionInteractorProtocol {
             return
         }
 
-        guard let data = self.persistance.load(usingKey: .encryptedData) as? Data else {
+        guard let data = self.persistance.load(usingKey: .encryptedData) else {
             self.presenter?.presentDecryptionError()
             return
         }
@@ -81,10 +86,15 @@ final class EncryptionInteractor: EncryptionInteractorProtocol {
     }
 
     func requestClear() {
-        self.persistance.clear(usingKey: .encryptedData)
+        let isClearSuccessful = self.persistance.clear(usingKey: .encryptedData)
 
-        self.presenter?.presentClearSuccessfully()
-        self.presenter?.presentEmptyFields()
-        self.determineButtonsAppearance()
+        if isClearSuccessful {
+            self.presenter?.presentClearSuccessfully()
+            self.presenter?.presentEmptyFields()
+            self.determineButtonsAppearance()
+        }
+        else {
+            self.presenter?.presentClearError()
+        }
     }
 }

@@ -25,6 +25,7 @@ protocol EncryptionPresenterProtocol {
     func presentDecryptedPhrase(_ phrase: String)
     func presentIncorrectPasswordError()
     func presentClearSuccessfully()
+    func presentClearError()
     func presentEmptyFields()
 }
 
@@ -72,6 +73,10 @@ final class EncryptionPresenter: EncryptionPresenterProtocol {
 
     func presentClearSuccessfully() {
         self.viewController?.showAlert(withTitle: "Success", message: "Data cleared successfully.")
+    }
+
+    func presentClearError() {
+        self.viewController?.showAlert(withTitle: "Error", message: "Error clearing data.")
     }
 
     func presentEmptyFields() {
