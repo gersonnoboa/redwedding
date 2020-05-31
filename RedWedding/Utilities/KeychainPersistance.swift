@@ -9,17 +9,17 @@
 import Foundation
 
 enum PersistanceKey: String {
-    case encryptedData
+    case encryptedData, encryptedPassword
 }
 
 protocol PersistanceProtocol {
-    func save(_ data: Data, usingKey key: PersistanceKey) -> Bool
-    func load(usingKey key: PersistanceKey) -> Data?
+    func save(_ data: Data, usingKey key: PersistanceKey, needsBiometric: Bool) -> Bool
+    func load(usingKey key: PersistanceKey, needsBiometric: Bool) -> Data?
     func clear(usingKey key: PersistanceKey) -> Bool
 }
 
 final class KeychainPersistance: PersistanceProtocol {
-    func save(_ data: Data, usingKey key: PersistanceKey) -> Bool {
+    func save(_ data: Data, usingKey key: PersistanceKey, needsBiometric: Bool) -> Bool {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key.rawValue,
@@ -29,7 +29,7 @@ final class KeychainPersistance: PersistanceProtocol {
         return status == errSecSuccess
     }
 
-    func load(usingKey key: PersistanceKey) -> Data? {
+    func load(usingKey key: PersistanceKey, needsBiometric: Bool) -> Data? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key.rawValue,
@@ -49,8 +49,8 @@ final class KeychainPersistance: PersistanceProtocol {
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key.rawValue
         ]
-        let status = SecItemDelete(query as CFDictionary)
+        SecItemDelete(query as CFDictionary)
 
-        return status == errSecSuccess
+        return true
     }
 }

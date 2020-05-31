@@ -15,6 +15,7 @@
 		A34051272482A5C300042AA1 /* EncryptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A34051262482A5C300042AA1 /* EncryptionViewController.xib */; };
 		A340512C2483C3E900042AA1 /* RNCryptorEncryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = A340512B2483C3E900042AA1 /* RNCryptorEncryption.swift */; };
 		A340512E2483C58B00042AA1 /* KeychainPersistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A340512D2483C58B00042AA1 /* KeychainPersistance.swift */; };
+		A3835B6E2483EC8D00A6D631 /* Biometrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3835B6D2483EC8D00A6D631 /* Biometrics.swift */; };
 		A3AAFD702481BFBB00BBF6A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AAFD6F2481BFBB00BBF6A1 /* AppDelegate.swift */; };
 		A3AAFD792481BFBC00BBF6A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3AAFD782481BFBC00BBF6A1 /* Assets.xcassets */; };
 		A3AAFD7C2481BFBC00BBF6A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3AAFD7A2481BFBC00BBF6A1 /* LaunchScreen.storyboard */; };
@@ -41,6 +42,7 @@
 		A34051262482A5C300042AA1 /* EncryptionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EncryptionViewController.xib; sourceTree = "<group>"; };
 		A340512B2483C3E900042AA1 /* RNCryptorEncryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNCryptorEncryption.swift; sourceTree = "<group>"; };
 		A340512D2483C58B00042AA1 /* KeychainPersistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainPersistance.swift; sourceTree = "<group>"; };
+		A3835B6D2483EC8D00A6D631 /* Biometrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Biometrics.swift; sourceTree = "<group>"; };
 		A3AAFD6C2481BFBB00BBF6A1 /* RedWedding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RedWedding.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3AAFD6F2481BFBB00BBF6A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3AAFD782481BFBC00BBF6A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			children = (
 				A340512B2483C3E900042AA1 /* RNCryptorEncryption.swift */,
 				A340512D2483C58B00042AA1 /* KeychainPersistance.swift */,
+				A3835B6D2483EC8D00A6D631 /* Biometrics.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3835B6E2483EC8D00A6D631 /* Biometrics.swift in Sources */,
 				A34051212481D31300042AA1 /* EncryptionInteractor.swift in Sources */,
 				A340512E2483C58B00042AA1 /* KeychainPersistance.swift in Sources */,
 				A340512C2483C3E900042AA1 /* RNCryptorEncryption.swift in Sources */,
@@ -421,7 +425,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -475,7 +479,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

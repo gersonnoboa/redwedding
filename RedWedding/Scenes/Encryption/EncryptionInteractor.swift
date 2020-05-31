@@ -19,14 +19,17 @@ protocol EncryptionInteractorProtocol {
 }
 
 final class EncryptionInteractor: EncryptionInteractorProtocol {
+    private let passwordForPassword = "Password's password"
+
     var presenter: EncryptionPresenterProtocol?
     var encryption: EncryptionProtocol = RNCryptorEncryption()
     var persistance: PersistanceProtocol = KeychainPersistance()
+    var biometrics: BiometricsProtocol = Biometrics()
 
     private let passwordLength = 6
 
     func determineButtonsAppearance() {
-        let hasNoEncryptedData = self.persistance.load(usingKey: .encryptedData) == nil
+        let hasNoEncryptedData = self.persistance.load(usingKey: .encryptedData, needsBiometric: false) == nil
 
         hasNoEncryptedData ?
             self.presenter?.presentButtonsAppearance(.encryptOnly) :
@@ -43,18 +46,40 @@ final class EncryptionInteractor: EncryptionInteractorProtocol {
             self.presenter?.presentPasswordWithoutRequirementsError()
             return
         }
-        
-        let data = self.encryption.encrypt(phrase, using: password)
-        let isSaveSuccessful = self.persistance.save(data, usingKey: .encryptedData)
 
-        if isSaveSuccessful {
-            self.presenter?.presentEncryptedSuccessfully()
-            self.presenter?.presentEmptyFields()
-            self.determineButtonsAppearance()
-        }
-        else {
+        guard hasEncryptedPhraseSuccessfully(phrase, using: password) else {
             self.presenter?.presentEncryptionError()
+            return
         }
+
+        if self.biometrics.isEnabled() {
+            guard hasEncryptedPasswordSuccessfully(password) else {
+                self.presenter?.presentEncryptionError()
+                let _ = self.persistance.clear(usingKey: .encryptedData)
+
+                return
+            }
+        }
+
+        executeEncryptionSuccess()
+    }
+
+    private func hasEncryptedPhraseSuccessfully(_ phrase: String, using password: String) -> Bool {
+        let data = self.encryption.encrypt(phrase, using: password)
+
+        return self.persistance.save(data, usingKey: .encryptedData, needsBiometric: false)
+    }
+
+    private func hasEncryptedPasswordSuccessfully(_ password: String) -> Bool {
+        let data = self.encryption.encrypt(password, using: passwordForPassword)
+
+        return self.persistance.save(data, usingKey: .encryptedPassword, needsBiometric: true)
+    }
+
+    private func executeEncryptionSuccess() {
+        self.presenter?.presentEncryptedSuccessfully()
+        self.presenter?.presentEmptyFields()
+        self.determineButtonsAppearance()
     }
 
     func requestDecryption(using password: String?) {
@@ -63,7 +88,7 @@ final class EncryptionInteractor: EncryptionInteractorProtocol {
             return
         }
 
-        guard let data = self.persistance.load(usingKey: .encryptedData) else {
+        guard let data = self.persistance.load(usingKey: .encryptedData, needsBiometric: false) else {
             self.presenter?.presentDecryptionError()
             return
         }
@@ -86,7 +111,8 @@ final class EncryptionInteractor: EncryptionInteractorProtocol {
     }
 
     func requestClear() {
-        let isClearSuccessful = self.persistance.clear(usingKey: .encryptedData)
+        let isClearSuccessful = self.persistance.clear(usingKey: .encryptedData) &&
+            self.persistance.clear(usingKey: .encryptedPassword)
 
         if isClearSuccessful {
             self.presenter?.presentClearSuccessfully()
