@@ -15,7 +15,7 @@ enum PersistanceKey: String {
 protocol PersistanceProtocol {
     func save(_ data: Data, usingKey key: PersistanceKey, needsBiometric: Bool) -> Bool
     func load(usingKey key: PersistanceKey, needsBiometric: Bool, completion: @escaping ((Data?) -> Void))
-    func clear(usingKey key: PersistanceKey) -> Bool
+    func clear(usingKey key: PersistanceKey)
 }
 
 final class KeychainPersistance: PersistanceProtocol {
@@ -74,13 +74,11 @@ final class KeychainPersistance: PersistanceProtocol {
         }
     }
 
-    func clear(usingKey key: PersistanceKey) -> Bool {
+    func clear(usingKey key: PersistanceKey) {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key.rawValue
         ]
         SecItemDelete(query as CFDictionary)
-
-        return true
     }
 }

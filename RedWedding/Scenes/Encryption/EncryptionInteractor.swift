@@ -26,7 +26,7 @@ final class EncryptionInteractor: EncryptionInteractorProtocol {
     var persistance: PersistanceProtocol = KeychainPersistance()
     var biometrics: BiometricsProtocol = Biometrics()
 
-    private let passwordLength = 6
+    static let passwordLength = 6
 
     func determineButtonsAppearance() {
         self.persistance.load(usingKey: .encryptedPhrase, needsBiometric: false) { [weak self] data in
@@ -42,7 +42,7 @@ final class EncryptionInteractor: EncryptionInteractorProtocol {
             return
         }
 
-        guard let password = password, password.count == passwordLength else {
+        guard let password = password, password.count == EncryptionInteractor.passwordLength else {
             self.presenter?.presentPasswordWithoutRequirementsError()
             return
         }
@@ -53,16 +53,7 @@ final class EncryptionInteractor: EncryptionInteractorProtocol {
         }
 
         if self.biometrics.areBiometricsAvailable() {
-            let data = self.encryption.encrypt(password, using: passwordForPassword)
-
-            guard self.persistance.save(data, usingKey: .encryptedPassword, needsBiometric: true) else {
-                self.presenter?.presentEncryptionError()
-                let _ = self.persistance.clear(usingKey: .encryptedPhrase)
-
-                return
-            }
-
-            executeEncryptionSuccess()
+            encryptPasswordWithBiometrics(password)
         }
         else {
             executeEncryptionSuccess()
@@ -71,25 +62,20 @@ final class EncryptionInteractor: EncryptionInteractorProtocol {
 
     func requestDecryption(using password: String?) {
         if self.biometrics.areBiometricsAvailable() {
-            decryptWithBiometrics(fallbackPassword: password)
+            decryptPhraseWithBiometrics(fallbackPassword: password)
         }
         else {
-            decryptWithPassword(password)
+            decryptPhraseWithPassword(password)
         }
     }
 
     func requestClear() {
-        let isClearSuccessful = self.persistance.clear(usingKey: .encryptedPhrase) &&
-            self.persistance.clear(usingKey: .encryptedPassword)
+        self.persistance.clear(usingKey: .encryptedPhrase)
+        self.persistance.clear(usingKey: .encryptedPassword)
 
-        if isClearSuccessful {
-            self.presenter?.presentClearSuccessfully()
-            self.presenter?.presentEmptyFields()
-            self.determineButtonsAppearance()
-        }
-        else {
-            self.presenter?.presentClearError()
-        }
+        self.presenter?.presentClearSuccessfully()
+        self.presenter?.presentEmptyFields()
+        self.determineButtonsAppearance()
     }
 }
 
@@ -100,38 +86,42 @@ extension EncryptionInteractor {
         return self.persistance.save(data, usingKey: .encryptedPhrase, needsBiometric: false)
     }
 
+    private func encryptPasswordWithBiometrics(_ password: String) {
+        let data = self.encryption.encrypt(password, using: passwordForPassword)
+
+        guard self.persistance.save(data, usingKey: .encryptedPassword, needsBiometric: true) else {
+            self.presenter?.presentEncryptionError()
+            let _ = self.persistance.clear(usingKey: .encryptedPhrase)
+
+            return
+        }
+
+        executeEncryptionSuccess()
+    }
+
     private func executeEncryptionSuccess() {
         self.presenter?.presentEncryptedSuccessfully()
         self.presenter?.presentEmptyFields()
         self.determineButtonsAppearance()
     }
 
-    private func decryptWithBiometrics(fallbackPassword: String?) {
+    private func decryptPhraseWithBiometrics(fallbackPassword: String?) {
         self.persistance.load(usingKey: .encryptedPassword, needsBiometric: true) { [weak self] data in
             guard let self = self else { return }
 
             guard let data = data else {
-                self.decryptWithPassword(fallbackPassword)
+                self.decryptPhraseWithPassword(fallbackPassword)
                 return
             }
 
-            do {
-                guard let decryptedData = try self.encryption.decrypt(data, using: self.passwordForPassword),
-                    let password = String(bytes: decryptedData, encoding: .utf8) else {
-                    self.presenter?.presentDecryptionError()
-                    return
-                }
+            guard let password = self.tryDecryption(using: data, password: self.passwordForPassword) else { return }
 
-                self.decryptPhrase(using: password)
-            }
-            catch {
-                self.presenter?.presentDecryptionError()
-            }
+            self.decryptPhrase(using: password)
         }
     }
 
-    private func decryptWithPassword(_ password: String?) {
-        guard let password = password, password.count == passwordLength else {
+    private func decryptPhraseWithPassword(_ password: String?) {
+        guard let password = password, password.count == EncryptionInteractor.passwordLength else {
             self.presenter?.presentIncorrectPasswordError()
             return
         }
@@ -146,21 +136,29 @@ extension EncryptionInteractor {
                 return
             }
 
-            do {
-                guard let decryptedData = try self?.encryption.decrypt(data, using: password),
-                    let phrase = String(bytes: decryptedData, encoding: .utf8) else {
-                    self?.presenter?.presentDecryptionError()
-                    return
-                }
+            guard let phrase = self?.tryDecryption(using: data, password: password) else { return }
 
-                self?.presenter?.presentDecryptedPhrase(phrase)
+            self?.presenter?.presentDecryptedPhrase(phrase)
+        }
+    }
+
+    private func tryDecryption(using data: Data, password: String) -> String? {
+        do {
+            guard let decryptedData = try self.encryption.decrypt(data, using: password),
+                let string = String(bytes: decryptedData, encoding: .utf8) else {
+                self.presenter?.presentDecryptionError()
+                return nil
             }
-            catch RNCryptor.Error.hmacMismatch {
-                self?.presenter?.presentIncorrectPasswordError()
-            }
-            catch {
-                self?.presenter?.presentDecryptionError()
-            }
+
+            return string
+        }
+        catch RNCryptor.Error.hmacMismatch {
+            self.presenter?.presentIncorrectPasswordError()
+            return nil
+        }
+        catch {
+            self.presenter?.presentDecryptionError()
+            return nil
         }
     }
 }

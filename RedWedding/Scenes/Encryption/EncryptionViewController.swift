@@ -46,10 +46,8 @@ final class EncryptionViewController: UIViewController {
 
     private func setup() {
         self.interactor = EncryptionInteractor()
-
         let presenter = EncryptionPresenter()
         presenter.viewController = self
-
         self.interactor?.presenter = presenter
     }
 
@@ -94,6 +92,6 @@ extension EncryptionViewController: EncryptionViewControllerProtocol {
 
 extension EncryptionViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        return textField.text?.count ?? 0 < 6
+        return textField.text?.count ?? 0 < EncryptionInteractor.passwordLength
     }
 }
