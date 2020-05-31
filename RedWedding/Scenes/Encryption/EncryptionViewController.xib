@@ -9,6 +9,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EncryptionViewController" customModule="RedWedding" customModuleProvider="target">
             <connections>
+                <outlet property="clearButton" destination="b40-dV-b4c" id="16b-zL-pPe"/>
+                <outlet property="decryptButton" destination="BjN-qf-1fM" id="fgN-PW-Tz1"/>
+                <outlet property="encryptButton" destination="R4s-lz-B0y" id="KbU-Sr-GSf"/>
                 <outlet property="passwordTextField" destination="bUB-h7-04u" id="sdX-ab-CSj"/>
                 <outlet property="phraseTextField" destination="7I2-e9-Jku" id="Njg-bV-umm"/>
                 <outlet property="view" destination="iN0-l3-epB" id="bKX-NR-kka"/>
@@ -20,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Kvn-Mg-pwg">
-                    <rect key="frame" x="16" y="60" width="382" height="176"/>
+                    <rect key="frame" x="16" y="60" width="382" height="222"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sWg-Oz-f99">
                             <rect key="frame" x="0.0" y="0.0" width="382" height="34"/>
@@ -31,7 +34,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7I2-e9-Jku">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="7I2-e9-Jku">
                                     <rect key="frame" x="108" y="0.0" width="274" height="34"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -50,7 +53,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bUB-h7-04u">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="bUB-h7-04u">
                                     <rect key="frame" x="108" y="0.0" width="274" height="34"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES" textContentType="password"/>
@@ -69,6 +72,13 @@
                             <state key="normal" title="Decrypt"/>
                             <connections>
                                 <action selector="decryptButtonPressed" destination="-1" eventType="touchUpInside" id="9KJ-K5-dTe"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b40-dV-b4c">
+                            <rect key="frame" x="0.0" y="192" width="382" height="30"/>
+                            <state key="normal" title="Clear"/>
+                            <connections>
+                                <action selector="clearButtonPressed" destination="-1" eventType="touchUpInside" id="SPJ-LN-LyE"/>
                             </connections>
                         </button>
                     </subviews>

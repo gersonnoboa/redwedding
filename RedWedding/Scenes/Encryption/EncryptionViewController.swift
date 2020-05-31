@@ -14,9 +14,13 @@ protocol EncryptionViewControllerProtocol: class {
     func showAlert(withTitle title: String, message: String)
     func showDecryptedPhrase(_ phrase: String)
     func clearFields()
+    func changeButtonsAppearance(encrypt isEncryptedShown: Bool, others areOthersShown: Bool)
 }
 
-final class EncryptionViewController: UIViewController, EncryptionViewControllerProtocol {
+final class EncryptionViewController: UIViewController {
+    @IBOutlet private weak var encryptButton: UIButton!
+    @IBOutlet private weak var decryptButton: UIButton!
+    @IBOutlet private weak var clearButton: UIButton!
     @IBOutlet private weak var phraseTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
 
@@ -33,8 +37,9 @@ final class EncryptionViewController: UIViewController, EncryptionViewController
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Encrypt"
+        self.title = "Welcome"
         setup()
+        self.interactor?.determineButtonsAppearance()
     }
 
     private func setup() {
@@ -54,6 +59,12 @@ final class EncryptionViewController: UIViewController, EncryptionViewController
         self.interactor?.requestDecryption(using: self.passwordTextField.text)
     }
 
+    @IBAction func clearButtonPressed() {
+        self.interactor?.requestClear()
+    }
+}
+
+extension EncryptionViewController: EncryptionViewControllerProtocol {
     func showAlert(withTitle title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -64,9 +75,16 @@ final class EncryptionViewController: UIViewController, EncryptionViewController
 
     func clearFields() {
         self.phraseTextField.text = ""
+        self.passwordTextField.text = ""
     }
 
     func showDecryptedPhrase(_ phrase: String) {
         self.phraseTextField.text = phrase
+    }
+
+    func changeButtonsAppearance(encrypt isEncryptedShown: Bool, others areOthersShown: Bool) {
+        self.encryptButton.isHidden = !isEncryptedShown
+        self.decryptButton.isHidden = !areOthersShown
+        self.clearButton.isHidden = !areOthersShown
     }
 }

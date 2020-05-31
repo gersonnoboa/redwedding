@@ -14,6 +14,8 @@ protocol EncryptionInteractorProtocol {
 
     func requestEncryption(of phrase: String?, using password: String?)
     func requestDecryption(using password: String?)
+    func requestClear()
+    func determineButtonsAppearance()
 }
 
 final class EncryptionInteractor: EncryptionInteractorProtocol {
@@ -21,44 +23,50 @@ final class EncryptionInteractor: EncryptionInteractorProtocol {
     var encryption: EncryptionProtocol = RNCryptorEncryption()
     var persistance: PersistanceProtocol = UserDefaultsPersistance()
 
+    private let passwordLength = 6
+
+    func determineButtonsAppearance() {
+        let hasNoEncryptedData = self.persistance.load(usingKey: .encryptedData) == nil
+
+        hasNoEncryptedData ?
+            self.presenter?.presentButtonsAppearance(.encryptOnly) :
+            self.presenter?.presentButtonsAppearance(.decryptAndClear)
+    }
+
     func requestEncryption(of phrase: String?, using password: String?) {
         guard let phrase = phrase, !phrase.isEmpty else {
             self.presenter?.presentPhraseEmptyError()
-
             return
         }
 
-        guard let password = password, password.count == 6 else {
+        guard let password = password, password.count == passwordLength else {
             self.presenter?.presentPasswordWithoutRequirementsError()
-
             return
         }
         
         let data = self.encryption.encrypt(phrase, using: password)
         self.persistance.save(data, usingKey: .encryptedData)
 
-        self.presenter?.presentEncryptionSuccessfulMessage()
+        self.presenter?.presentEncryptedSuccessfully()
+        self.presenter?.presentEmptyFields()
+        self.determineButtonsAppearance()
     }
 
     func requestDecryption(using password: String?) {
-        guard let password = password else {
-            self.presenter?.presentPasswordEmptyError()
-
+        guard let password = password, password.count == passwordLength else {
+            self.presenter?.presentIncorrectPasswordError()
             return
         }
 
         guard let data = self.persistance.load(usingKey: .encryptedData) as? Data else {
-                self.presenter?.presentDecryptionError()
-
-                return
+            self.presenter?.presentDecryptionError()
+            return
         }
 
         do {
-            let decryptedData = try self.encryption.decrypt(data, using: password)
-
-            guard let decData = decryptedData, let phrase = String(bytes: decData, encoding: .utf8) else {
+            guard let decryptedData = try self.encryption.decrypt(data, using: password),
+                let phrase = String(bytes: decryptedData, encoding: .utf8) else {
                 self.presenter?.presentDecryptionError()
-
                 return
             }
 
@@ -70,5 +78,13 @@ final class EncryptionInteractor: EncryptionInteractorProtocol {
         catch {
             self.presenter?.presentDecryptionError()
         }
+    }
+
+    func requestClear() {
+        self.persistance.clear(usingKey: .encryptedData)
+
+        self.presenter?.presentClearSuccessfully()
+        self.presenter?.presentEmptyFields()
+        self.determineButtonsAppearance()
     }
 }

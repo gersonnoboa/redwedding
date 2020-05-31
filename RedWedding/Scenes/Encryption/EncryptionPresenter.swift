@@ -8,25 +8,39 @@
 
 import Foundation
 
+enum EncryptButtonsAppearance {
+    case encryptOnly
+    case decryptAndClear
+}
+
 protocol EncryptionPresenterProtocol {
     var viewController: EncryptionViewControllerProtocol? { get set }
 
-    func presentEncryptionSuccessfulMessage()
+    func presentButtonsAppearance(_ appearance: EncryptButtonsAppearance)
+    func presentEncryptedSuccessfully()
     func presentPhraseEmptyError()
     func presentPasswordWithoutRequirementsError()
     func presentEncryptionError()
-    func presentPasswordEmptyError()
     func presentDecryptionError()
     func presentDecryptedPhrase(_ phrase: String)
     func presentIncorrectPasswordError()
+    func presentClearSuccessfully()
+    func presentEmptyFields()
 }
 
 final class EncryptionPresenter: EncryptionPresenterProtocol {
     weak var viewController: EncryptionViewControllerProtocol?
 
-    func presentEncryptionSuccessfulMessage() {
+    func presentButtonsAppearance(_ appearance: EncryptButtonsAppearance) {
+        switch appearance {
+        case .encryptOnly:
+            self.viewController?.changeButtonsAppearance(encrypt: true, others: false)
+        case .decryptAndClear:
+            self.viewController?.changeButtonsAppearance(encrypt: false, others: true)
+        }
+    }
+    func presentEncryptedSuccessfully() {
         self.viewController?.showAlert(withTitle: "Success", message: "Phrase encrypted successfully.")
-        self.viewController?.clearFields()
     }
 
     func presentPhraseEmptyError() {
@@ -44,10 +58,6 @@ final class EncryptionPresenter: EncryptionPresenterProtocol {
         self.viewController?.showAlert(withTitle: "Error", message: "Error encrypting phrase.")
     }
 
-    func presentPasswordEmptyError() {
-        self.viewController?.showAlert(withTitle: "Error", message: "Password must not be empty.")
-    }
-
     func presentDecryptionError() {
         self.viewController?.showAlert(withTitle: "Error", message: "Error decrypting phrase.")
     }
@@ -58,5 +68,13 @@ final class EncryptionPresenter: EncryptionPresenterProtocol {
 
     func presentDecryptedPhrase(_ phrase: String) {
         self.viewController?.showDecryptedPhrase(phrase)
+    }
+
+    func presentClearSuccessfully() {
+        self.viewController?.showAlert(withTitle: "Success", message: "Data cleared successfully.")
+    }
+
+    func presentEmptyFields() {
+        self.viewController?.clearFields()
     }
 }
