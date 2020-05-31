@@ -10,8 +10,14 @@ import Foundation
 
 protocol EncryptionInteractorProtocol {
     var presenter: EncryptionPresenterProtocol? { get set }
+
+    func requestEncryption()
 }
 
 final class EncryptionInteractor: EncryptionInteractorProtocol {
     var presenter: EncryptionPresenterProtocol?
+
+    func requestEncryption() {
+        
+    }
 }

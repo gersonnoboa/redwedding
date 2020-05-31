@@ -18,23 +18,23 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="egG-ye-khj">
-                    <rect key="frame" x="184" y="103" width="46" height="90"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="egG-ye-khj">
+                    <rect key="frame" x="179.5" y="103" width="55" height="120"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PNJ-ZW-6Ne">
-                            <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
-                            <state key="normal" title="Button"/>
+                            <rect key="frame" x="0.0" y="0.0" width="55" height="30"/>
+                            <state key="normal" title="Encrypt"/>
                             <connections>
                                 <action selector="encryptButtonPressed" destination="-1" eventType="touchUpInside" id="Nak-9q-7gq"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RUf-s8-jt4">
-                            <rect key="frame" x="0.0" y="30" width="46" height="30"/>
-                            <state key="normal" title="Button"/>
+                            <rect key="frame" x="0.0" y="45" width="55" height="30"/>
+                            <state key="normal" title="Decrypt"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jvV-C3-eOW">
-                            <rect key="frame" x="0.0" y="60" width="46" height="30"/>
-                            <state key="normal" title="Button"/>
+                            <rect key="frame" x="0.0" y="90" width="55" height="30"/>
+                            <state key="normal" title="Clear"/>
                         </button>
                     </subviews>
                     <constraints>

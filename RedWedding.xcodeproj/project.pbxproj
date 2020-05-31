@@ -15,6 +15,8 @@
 		A34051252481D5AB00042AA1 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A34051242481D5AB00042AA1 /* MainViewController.xib */; };
 		A34051272482A5C300042AA1 /* EncryptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A34051262482A5C300042AA1 /* EncryptionViewController.xib */; };
 		A34051292483C01800042AA1 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34051282483C01800042AA1 /* MainRouter.swift */; };
+		A340512C2483C3E900042AA1 /* RNCryptorEncryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = A340512B2483C3E900042AA1 /* RNCryptorEncryption.swift */; };
+		A340512E2483C58B00042AA1 /* UserDefaultsPersistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A340512D2483C58B00042AA1 /* UserDefaultsPersistance.swift */; };
 		A3AAFD702481BFBB00BBF6A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AAFD6F2481BFBB00BBF6A1 /* AppDelegate.swift */; };
 		A3AAFD742481BFBB00BBF6A1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AAFD732481BFBB00BBF6A1 /* MainViewController.swift */; };
 		A3AAFD792481BFBC00BBF6A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3AAFD782481BFBC00BBF6A1 /* Assets.xcassets */; };
@@ -44,6 +46,8 @@
 		A34051242481D5AB00042AA1 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		A34051262482A5C300042AA1 /* EncryptionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EncryptionViewController.xib; sourceTree = "<group>"; };
 		A34051282483C01800042AA1 /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
+		A340512B2483C3E900042AA1 /* RNCryptorEncryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNCryptorEncryption.swift; sourceTree = "<group>"; };
+		A340512D2483C58B00042AA1 /* UserDefaultsPersistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsPersistance.swift; sourceTree = "<group>"; };
 		A3AAFD6C2481BFBB00BBF6A1 /* RedWedding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RedWedding.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3AAFD6F2481BFBB00BBF6A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3AAFD732481BFBB00BBF6A1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +124,15 @@
 			path = Encryption;
 			sourceTree = "<group>";
 		};
+		A340512A2483C3D800042AA1 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A340512B2483C3E900042AA1 /* RNCryptorEncryption.swift */,
+				A340512D2483C58B00042AA1 /* UserDefaultsPersistance.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		A3AAFD632481BFBB00BBF6A1 = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +156,7 @@
 		A3AAFD6E2481BFBB00BBF6A1 /* RedWedding */ = {
 			isa = PBXGroup;
 			children = (
+				A340512A2483C3D800042AA1 /* Utilities */,
 				A33767C42481C47F004F19DB /* Scenes */,
 				A3AAFD6F2481BFBB00BBF6A1 /* AppDelegate.swift */,
 				A3AAFD782481BFBC00BBF6A1 /* Assets.xcassets */,
@@ -345,6 +359,8 @@
 				A3AAFD952481C07F00BBF6A1 /* MainPresenter.swift in Sources */,
 				A34051292483C01800042AA1 /* MainRouter.swift in Sources */,
 				A34051212481D31300042AA1 /* EncryptionInteractor.swift in Sources */,
+				A340512E2483C58B00042AA1 /* UserDefaultsPersistance.swift in Sources */,
+				A340512C2483C3E900042AA1 /* RNCryptorEncryption.swift in Sources */,
 				A340511F2481D30700042AA1 /* EncryptionViewController.swift in Sources */,
 				A3AAFD742481BFBB00BBF6A1 /* MainViewController.swift in Sources */,
 				A3AAFD702481BFBB00BBF6A1 /* AppDelegate.swift in Sources */,
@@ -433,7 +449,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -487,7 +503,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

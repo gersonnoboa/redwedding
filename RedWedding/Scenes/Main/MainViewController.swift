@@ -31,6 +31,7 @@ final class MainViewController: UIViewController, MainViewControllerProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.title = "Hello"
         setup()
     }
 
