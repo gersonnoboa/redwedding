@@ -18,9 +18,18 @@ final class MainViewController: UIViewController, MainViewControllerProtocol {
     @IBOutlet weak var encryptButton: UIButton!
 
     var interactor: MainInteractorProtocol?
+    var router: MainRouterProtocol?
+
+    init() {
+        super.init(nibName: nil, bundle: nil)
+    }
 
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
         setup()
     }
@@ -32,14 +41,17 @@ final class MainViewController: UIViewController, MainViewControllerProtocol {
         presenter.viewController = self
         
         interactor?.presenter = presenter
+
+        let bla = MainRouter(navigationController: self.navigationController)
+        self.router = bla
     }
 
     @IBAction func encryptButtonPressed() {
-        interactor?.requestEncryption()
+        self.router?.navigateToEncryption()
     }
 
     func showEncryptionRequest() {
-        print("Works")
+
     }
 }
 

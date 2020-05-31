@@ -3,16 +3,20 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		05D409E8243BD36C3913F2E1 /* Pods_RedWedding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F47BF34567E0488DBE3A9CE /* Pods_RedWedding.framework */; };
 		4FE6273B831069A0D15F32E4 /* Pods_RedWeddingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 026DE236A8F1437034E384E4 /* Pods_RedWeddingTests.framework */; };
+		A340511F2481D30700042AA1 /* EncryptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A340511E2481D30700042AA1 /* EncryptionViewController.swift */; };
+		A34051212481D31300042AA1 /* EncryptionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34051202481D31300042AA1 /* EncryptionInteractor.swift */; };
+		A34051232481D32200042AA1 /* EncryptionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34051222481D32200042AA1 /* EncryptionPresenter.swift */; };
+		A34051252481D5AB00042AA1 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A34051242481D5AB00042AA1 /* MainViewController.xib */; };
+		A34051272482A5C300042AA1 /* EncryptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A34051262482A5C300042AA1 /* EncryptionViewController.xib */; };
+		A34051292483C01800042AA1 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34051282483C01800042AA1 /* MainRouter.swift */; };
 		A3AAFD702481BFBB00BBF6A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AAFD6F2481BFBB00BBF6A1 /* AppDelegate.swift */; };
-		A3AAFD722481BFBB00BBF6A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AAFD712481BFBB00BBF6A1 /* SceneDelegate.swift */; };
 		A3AAFD742481BFBB00BBF6A1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AAFD732481BFBB00BBF6A1 /* MainViewController.swift */; };
-		A3AAFD772481BFBB00BBF6A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3AAFD752481BFBB00BBF6A1 /* Main.storyboard */; };
 		A3AAFD792481BFBC00BBF6A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3AAFD782481BFBC00BBF6A1 /* Assets.xcassets */; };
 		A3AAFD7C2481BFBC00BBF6A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3AAFD7A2481BFBC00BBF6A1 /* LaunchScreen.storyboard */; };
 		A3AAFD872481BFBD00BBF6A1 /* RedWeddingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AAFD862481BFBD00BBF6A1 /* RedWeddingTests.swift */; };
@@ -34,11 +38,15 @@
 		026DE236A8F1437034E384E4 /* Pods_RedWeddingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RedWeddingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0753E6DA0D8AF76E053EF667 /* Pods-RedWeddingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedWeddingTests.release.xcconfig"; path = "Target Support Files/Pods-RedWeddingTests/Pods-RedWeddingTests.release.xcconfig"; sourceTree = "<group>"; };
 		5F47BF34567E0488DBE3A9CE /* Pods_RedWedding.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RedWedding.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A340511E2481D30700042AA1 /* EncryptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionViewController.swift; sourceTree = "<group>"; };
+		A34051202481D31300042AA1 /* EncryptionInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionInteractor.swift; sourceTree = "<group>"; };
+		A34051222481D32200042AA1 /* EncryptionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionPresenter.swift; sourceTree = "<group>"; };
+		A34051242481D5AB00042AA1 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		A34051262482A5C300042AA1 /* EncryptionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EncryptionViewController.xib; sourceTree = "<group>"; };
+		A34051282483C01800042AA1 /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
 		A3AAFD6C2481BFBB00BBF6A1 /* RedWedding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RedWedding.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3AAFD6F2481BFBB00BBF6A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A3AAFD712481BFBB00BBF6A1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A3AAFD732481BFBB00BBF6A1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		A3AAFD762481BFBB00BBF6A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A3AAFD782481BFBC00BBF6A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A3AAFD7B2481BFBC00BBF6A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A3AAFD7D2481BFBC00BBF6A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -80,7 +88,6 @@
 				D55A4531D90C400ED4AD812E /* Pods-RedWeddingTests.debug.xcconfig */,
 				0753E6DA0D8AF76E053EF667 /* Pods-RedWeddingTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -96,9 +103,21 @@
 		A33767C42481C47F004F19DB /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				A340511D2481D19600042AA1 /* Encryption */,
 				A3AAFD912481C04100BBF6A1 /* Main */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		A340511D2481D19600042AA1 /* Encryption */ = {
+			isa = PBXGroup;
+			children = (
+				A340511E2481D30700042AA1 /* EncryptionViewController.swift */,
+				A34051262482A5C300042AA1 /* EncryptionViewController.xib */,
+				A34051202481D31300042AA1 /* EncryptionInteractor.swift */,
+				A34051222481D32200042AA1 /* EncryptionPresenter.swift */,
+			);
+			path = Encryption;
 			sourceTree = "<group>";
 		};
 		A3AAFD632481BFBB00BBF6A1 = {
@@ -126,8 +145,6 @@
 			children = (
 				A33767C42481C47F004F19DB /* Scenes */,
 				A3AAFD6F2481BFBB00BBF6A1 /* AppDelegate.swift */,
-				A3AAFD712481BFBB00BBF6A1 /* SceneDelegate.swift */,
-				A3AAFD752481BFBB00BBF6A1 /* Main.storyboard */,
 				A3AAFD782481BFBC00BBF6A1 /* Assets.xcassets */,
 				A3AAFD7A2481BFBC00BBF6A1 /* LaunchScreen.storyboard */,
 				A3AAFD7D2481BFBC00BBF6A1 /* Info.plist */,
@@ -148,8 +165,10 @@
 			isa = PBXGroup;
 			children = (
 				A3AAFD732481BFBB00BBF6A1 /* MainViewController.swift */,
+				A34051242481D5AB00042AA1 /* MainViewController.xib */,
 				A3AAFD922481C07700BBF6A1 /* MainInteractor.swift */,
 				A3AAFD942481C07F00BBF6A1 /* MainPresenter.swift */,
+				A34051282483C01800042AA1 /* MainRouter.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -239,8 +258,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3AAFD7C2481BFBC00BBF6A1 /* LaunchScreen.storyboard in Resources */,
+				A34051252481D5AB00042AA1 /* MainViewController.xib in Resources */,
 				A3AAFD792481BFBC00BBF6A1 /* Assets.xcassets in Resources */,
-				A3AAFD772481BFBB00BBF6A1 /* Main.storyboard in Resources */,
+				A34051272482A5C300042AA1 /* EncryptionViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,10 +343,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3AAFD952481C07F00BBF6A1 /* MainPresenter.swift in Sources */,
+				A34051292483C01800042AA1 /* MainRouter.swift in Sources */,
+				A34051212481D31300042AA1 /* EncryptionInteractor.swift in Sources */,
+				A340511F2481D30700042AA1 /* EncryptionViewController.swift in Sources */,
 				A3AAFD742481BFBB00BBF6A1 /* MainViewController.swift in Sources */,
 				A3AAFD702481BFBB00BBF6A1 /* AppDelegate.swift in Sources */,
-				A3AAFD722481BFBB00BBF6A1 /* SceneDelegate.swift in Sources */,
 				A3AAFD932481C07700BBF6A1 /* MainInteractor.swift in Sources */,
+				A34051232481D32200042AA1 /* EncryptionPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,14 +372,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A3AAFD752481BFBB00BBF6A1 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A3AAFD762481BFBB00BBF6A1 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A3AAFD7A2481BFBC00BBF6A1 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
