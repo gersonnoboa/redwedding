@@ -18,11 +18,7 @@ protocol PersistanceProtocol {
 }
 
 final class UserDefaultsPersistance: PersistanceProtocol {
-    var userDefaults: UserDefaults
-
-    init(userDefaults: UserDefaults = UserDefaults.standard) {
-        self.userDefaults = userDefaults
-    }
+    var userDefaults: UserDefaults = UserDefaults.standard
 
     func save(_ data: Data, usingKey key: PersistanceKey) {
         self.userDefaults.set(data, forKey: key.rawValue)

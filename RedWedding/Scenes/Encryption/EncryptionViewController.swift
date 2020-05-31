@@ -10,9 +10,14 @@ import UIKit
 
 protocol EncryptionViewControllerProtocol: class {
     var interactor: EncryptionInteractorProtocol? { get set }
+
+    func showAlert(withTitle title: String, message: String)
 }
 
 final class EncryptionViewController: UIViewController, EncryptionViewControllerProtocol {
+    @IBOutlet private weak var phraseTextField: UITextField!
+    @IBOutlet private weak var passwordTextField: UITextField!
+
     var interactor: EncryptionInteractorProtocol?
 
     init() {
@@ -26,7 +31,7 @@ final class EncryptionViewController: UIViewController, EncryptionViewController
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Encrypt/Decrypt"
+        self.title = "Encrypt"
         setup()
     }
 
@@ -37,5 +42,17 @@ final class EncryptionViewController: UIViewController, EncryptionViewController
         presenter.viewController = self
 
         self.interactor?.presenter = presenter
+    }
+
+    @IBAction func encryptButtonPressed() {
+        self.interactor?.requestEncryption(of: self.phraseTextField.text, using: self.passwordTextField.text)
+    }
+
+    func showAlert(withTitle title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(action)
+
+        self.present(alert, animated: true, completion: nil)
     }
 }

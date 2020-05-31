@@ -11,13 +11,30 @@ import Foundation
 protocol EncryptionInteractorProtocol {
     var presenter: EncryptionPresenterProtocol? { get set }
 
-    func requestEncryption()
+    func requestEncryption(of phrase: String?, using password: String?)
 }
 
 final class EncryptionInteractor: EncryptionInteractorProtocol {
     var presenter: EncryptionPresenterProtocol?
+    var encryption: EncryptionProtocol = RNCryptorEncryption()
+    var persistance: PersistanceProtocol = UserDefaultsPersistance()
 
-    func requestEncryption() {
+    func requestEncryption(of phrase: String?, using password: String?) {
+        guard let phrase = phrase, !phrase.isEmpty else {
+            self.presenter?.presentPhraseEmptyError()
+
+            return
+        }
+
+        guard let password = password, password.count == 6 else {
+            self.presenter?.presentPasswordWithoutRequirementsError()
+
+            return
+        }
         
+        let data = self.encryption.encrypt(phrase, using: password)
+        self.persistance.save(data, usingKey: .encryptedData)
+
+        self.presenter?.presentEncryptionSuccessfulMessage()
     }
 }

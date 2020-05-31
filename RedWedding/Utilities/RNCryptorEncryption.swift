@@ -10,15 +10,16 @@ import Foundation
 import RNCryptor
 
 protocol EncryptionProtocol {
-    func encrypt(_ string: String, using password: String) -> Data?
+    func encrypt(_ string: String, using password: String) -> Data
     func decrypt(_ data: Data, using password: String) throws -> Data?
 }
 
 final class RNCryptorEncryption: EncryptionProtocol {
-    func encrypt(_ string: String, using password: String) -> Data? {
-        guard let data = Data(base64Encoded: string) else { return nil }
+    func encrypt(_ string: String, using password: String) -> Data {
+        let data = Data(string.utf8)
+        let encryptedData = RNCryptor.encrypt(data: data, withPassword: password)
 
-        return RNCryptor.encrypt(data: data, withPassword: password)
+        return encryptedData
     }
 
     func decrypt(_ data: Data, using password: String) throws -> Data? {
