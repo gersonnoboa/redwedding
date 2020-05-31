@@ -4,15 +4,11 @@ The phrase can be decrypted either by typing a password (in case biometrics
 are disabled), or by retrieving the the encrypted password in the Secure 
 Enclave (through biometrics). Supports iOS 11+ and dark mode.
 
-Uses [Clean Swift](https://clean-swift.com/) architecture.
+It uses [Clean Swift](https://clean-swift.com/) architecture.
 
 ## Installation
-Open a terminal on the project folder and execute
-
-    sudo gem install cocoapods
-    pod install
-
-Open `RedWedding.xcworkspace` and run.
+Open `RedWedding.xcworkspace` and run. This app was tested mostly on device, 
+as it is easier to test FaceID on a device.
 
 ## Libraries used
 * Cocoapods
