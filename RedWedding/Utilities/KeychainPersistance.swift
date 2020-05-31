@@ -1,5 +1,5 @@
 //
-//  UserDefaultsPersistance.swift
+//  KeychainPersistance.swift
 //  RedWedding
 //
 //  Created by Gerson Noboa on 31.05.2020.
@@ -19,8 +19,6 @@ protocol PersistanceProtocol {
 }
 
 final class KeychainPersistance: PersistanceProtocol {
-    var biometrics: BiometricsProtocol = Biometrics()
-    
     private lazy var access: SecAccessControl? = {
         return SecAccessControlCreateWithFlags(
             nil,
